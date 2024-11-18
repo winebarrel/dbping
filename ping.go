@@ -26,13 +26,19 @@ func Ping(config *Config) {
 
 		for {
 			now := time.Now()
-			err = db.Ping()
+			v := "PING"
+
+			if config.Query != "" {
+				err = db.QueryRow(config.Query).Scan(&v)
+			} else {
+				err = db.Ping()
+			}
 
 			if err != nil {
 				break
 			}
 
-			log.Printf("OK %s", time.Since(now))
+			log.Printf("%s %s", v, time.Since(now))
 			time.Sleep(time.Duration(config.Interval) * time.Second)
 		}
 	}
