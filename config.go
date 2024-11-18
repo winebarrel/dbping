@@ -15,14 +15,15 @@ const (
 	DBDriverPostgreSQL DBDriver = "pgx"
 )
 
-type DBConfig struct {
-	DSN    string   `kong:"arg='',required,help='DSN to connect to. \n - MySQL: https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-dsn-data-source-name \n - PostgreSQL: https://pkg.go.dev/github.com/jackc/pgx/v5/stdlib#pkg-overview'"`
-	Driver DBDriver `kong:"-"`
+type Config struct {
+	DSN      string   `kong:"arg='',required,help='DSN to connect to. \n - MySQL: https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-dsn-data-source-name \n - PostgreSQL: https://pkg.go.dev/github.com/jackc/pgx/v5/stdlib#pkg-overview'"`
+	Interval uint     `kong:"short='i',default='3',help='Interval seconds.'"`
+	Driver   DBDriver `kong:"-"`
 }
 
 // Kong hook
 // see https://github.com/alecthomas/kong#hooks-beforereset-beforeresolve-beforeapply-afterapply-and-the-bind-option
-func (config *DBConfig) AfterApply() error {
+func (config *Config) AfterApply() error {
 	if _, err := mysql.ParseDSN(config.DSN); err == nil {
 		config.Driver = DBDriverMySQL
 	} else if _, err := pgx.ParseConfig(config.DSN); err == nil {
@@ -34,7 +35,7 @@ func (config *DBConfig) AfterApply() error {
 	return nil
 }
 
-func (config *DBConfig) Open() (*sql.DB, error) {
+func (config *Config) Open() (*sql.DB, error) {
 	db, err := sql.Open(string(config.Driver), config.DSN)
 
 	if err != nil {

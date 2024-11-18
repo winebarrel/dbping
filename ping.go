@@ -6,14 +6,14 @@ import (
 	"time"
 )
 
-func Ping(config *DBConfig) {
+func Ping(config *Config) {
 	var db *sql.DB
 	var err error
 
 	for {
 		if err != nil {
 			log.Printf("[ERROR] %s", err)
-			time.Sleep(1 * time.Second)
+			time.Sleep(time.Duration(config.Interval) * time.Second)
 		}
 
 		if db == nil {
@@ -33,7 +33,7 @@ func Ping(config *DBConfig) {
 			}
 
 			log.Printf("OK %s", time.Since(now))
-			time.Sleep(1 * time.Second)
+			time.Sleep(time.Duration(config.Interval) * time.Second)
 		}
 	}
 }
