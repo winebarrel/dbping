@@ -14,9 +14,9 @@ func init() {
 	log.SetFlags(0)
 }
 
-func parseArgs() *dbping.DBConfig {
+func parseArgs() *dbping.Config {
 	var CLI struct {
-		dbping.DBConfig
+		dbping.Config
 		Version kong.VersionFlag
 	}
 
@@ -25,7 +25,7 @@ func parseArgs() *dbping.DBConfig {
 	_, err := parser.Parse(os.Args[1:])
 	parser.FatalIfErrorf(err)
 
-	return &CLI.DBConfig
+	return &CLI.Config
 }
 
 func main() {

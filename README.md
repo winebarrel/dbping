@@ -7,7 +7,7 @@ PING for DB.
 ## Usage
 
 ```
-sage: dbping <dsn> [flags]
+Usage: dbping <dsn> [flags]
 
 Arguments:
   <dsn>    DSN to connect to.
@@ -15,7 +15,8 @@ Arguments:
              - PostgreSQL: https://pkg.go.dev/github.com/jackc/pgx/v5/stdlib#pkg-overview
 
 Flags:
-  -h, --help       Show help.
+  -h, --help          Show help.
+  -i, --interval=3    Interval seconds.
       --version
 ```
 
