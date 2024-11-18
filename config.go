@@ -1,7 +1,6 @@
 package dbping
 
 import (
-	"database/sql"
 	"fmt"
 
 	"github.com/go-sql-driver/mysql"
@@ -35,19 +34,4 @@ func (config *Config) AfterApply() error {
 	}
 
 	return nil
-}
-
-func (config *Config) Open() (*sql.DB, error) {
-	db, err := sql.Open(string(config.Driver), config.DSN)
-
-	if err != nil {
-		return nil, err
-	}
-
-	db.SetConnMaxLifetime(0)
-	db.SetConnMaxIdleTime(0)
-	db.SetMaxIdleConns(1)
-	db.SetMaxOpenConns(1)
-
-	return db, nil
 }

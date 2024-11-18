@@ -17,7 +17,7 @@ func Ping(config *Config) {
 		}
 
 		if db == nil {
-			db, err = config.Open()
+			db, err = openDB(config)
 
 			if err != nil {
 				continue
@@ -42,4 +42,19 @@ func Ping(config *Config) {
 			time.Sleep(time.Duration(config.Interval) * time.Second)
 		}
 	}
+}
+
+func openDB(config *Config) (*sql.DB, error) {
+	db, err := sql.Open(string(config.Driver), config.DSN)
+
+	if err != nil {
+		return nil, err
+	}
+
+	db.SetConnMaxLifetime(0)
+	db.SetConnMaxIdleTime(0)
+	db.SetMaxIdleConns(1)
+	db.SetMaxOpenConns(1)
+
+	return db, nil
 }
