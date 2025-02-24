@@ -4,7 +4,7 @@ go 1.23.3
 
 require (
 	github.com/alecthomas/kong v1.8.1
-	github.com/go-sql-driver/mysql v1.8.1
+	github.com/go-sql-driver/mysql v1.9.0
 	github.com/jackc/pgx/v5 v5.7.2
 )
 
