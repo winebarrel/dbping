@@ -44,7 +44,7 @@ func Ping(config *Config) {
 			}
 
 			dur := rAfterDP.ReplaceAllString(time.Since(now).String(), "")
-			log.Printf("%s %s", v, dur)
+			log.Printf("%s | %s %s", now.Format(time.TimeOnly), v, dur)
 			time.Sleep(time.Duration(config.Interval) * time.Second)
 		}
 	}
