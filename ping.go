@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	rAfterDP = regexp.MustCompile(`(?:\.[0-9]+)?`)
+	rAfterDP = regexp.MustCompile(`\.[0-9]+`)
 )
 
 func Ping(config *Config) {
