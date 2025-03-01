@@ -13,3 +13,12 @@ builds:
       - darwin
 checksum:
   name_template: "checksums.txt"
+nfpms:
+  - file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Arch }}"
+    homepage: https://github.com/winebarrel/dbping
+    description: PING for DB.
+    license: MIT
+    formats:
+      - deb
+      - rpm
+    bindir: /usr/bin
