@@ -24,26 +24,26 @@ Flags:
 
 ```
 $ dbping 'root@tcp(127.0.0.1:13306)/mysql'
-PING 4.152041ms
-PING 1.601542ms
-PING 1.205208ms
+PING 4ms
+PING 1ms
+PING 1ms
 [ERROR] driver: bad connection
 [ERROR] dial tcp 127.0.0.1:13306: connect: connection refused
 [ERROR] dial tcp 127.0.0.1:13306: connect: connection refused
-PING 6.901792ms
-PING 2.089375ms
-PING 2.137875ms
+PING 6ms
+PING 2ms
+PING 2ms
 ...
 
 % dbping 'root@tcp(127.0.0.1:13306)/mysql' -q 'select connection_id()'
-11 3.994167ms
-11 2.172917ms
-11 2.531042ms
+11 3ms
+11 2ms
+11 2ms
 ...
 
 % dbping 'postgres://postgres@localhost:15432' -q 'select pg_backend_pid()'
-68 13.914584ms
-68 3.430833ms
-68 2.396708ms
+68 13ms
+68 3ms
+68 2ms
 ...
 ```
