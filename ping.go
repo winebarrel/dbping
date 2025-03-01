@@ -3,7 +3,12 @@ package dbping
 import (
 	"database/sql"
 	"log"
+	"regexp"
 	"time"
+)
+
+var (
+	rAfterDP = regexp.MustCompile(`\.[0-9]+`)
 )
 
 func Ping(config *Config) {
@@ -38,7 +43,8 @@ func Ping(config *Config) {
 				break
 			}
 
-			log.Printf("%s %s", v, time.Since(now))
+			dur := rAfterDP.ReplaceAllString(time.Since(now).String(), "")
+			log.Printf("%s %s", v, dur)
 			time.Sleep(time.Duration(config.Interval) * time.Second)
 		}
 	}
