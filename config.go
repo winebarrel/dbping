@@ -23,6 +23,7 @@ const (
 type Config struct {
 	DSN      string   `kong:"arg='',required,help='DSN to connect to. \n - MySQL: https://pkg.go.dev/github.com/go-sql-driver/mysql#readme-dsn-data-source-name \n - PostgreSQL: https://pkg.go.dev/github.com/jackc/pgx/v5/stdlib#pkg-overview'"`
 	Interval uint     `kong:"short='i',default='3',help='Interval seconds.'"`
+	Timeout  uint     `kong:"short='t',default='3',help='Timeout seconds.'"`
 	Query    string   `kong:"short='q',help='Query to run.'"`
 	IAMAuth  bool     `kong:"help='Use IAM authentication.'"`
 	Driver   DBDriver `kong:"-"`

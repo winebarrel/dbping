@@ -17,6 +17,7 @@ Arguments:
 Flags:
   -h, --help            Show help.
   -i, --interval=3      Interval seconds.
+  -t, --timeout=3       Timeout seconds.
   -q, --query=STRING    Query to run.
       --iam-auth        Use IAM authentication.
       --version

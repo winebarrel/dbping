@@ -1,6 +1,7 @@
 package dbping
 
 import (
+	"context"
 	"database/sql"
 	"log"
 	"regexp"
@@ -30,14 +31,17 @@ func Ping(config *Config) {
 		}
 
 		for {
+			ctx, cancel := context.WithTimeout(context.Background(), time.Duration(config.Timeout)*time.Second)
 			now := time.Now()
 			v := "PING"
 
 			if config.Query != "" {
-				err = db.QueryRow(config.Query).Scan(&v)
+				err = db.QueryRowContext(ctx, config.Query).Scan(&v)
 			} else {
-				err = db.Ping()
+				err = db.PingContext(ctx)
 			}
+
+			cancel()
 
 			if err != nil {
 				break
