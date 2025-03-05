@@ -22,3 +22,4 @@ nfpms:
       - deb
       - rpm
     bindir: /usr/bin
+    maintainer: "Genki Sugawawa <sugawara@winebarrel.jp>"
