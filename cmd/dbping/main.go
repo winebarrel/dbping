@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	"github.com/alecthomas/kong"
@@ -9,10 +8,6 @@ import (
 )
 
 var version string
-
-func init() {
-	log.SetFlags(0)
-}
 
 func parseArgs() *dbping.Config {
 	var CLI struct {
