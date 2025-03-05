@@ -3,7 +3,7 @@ package dbping
 import (
 	"context"
 	"database/sql"
-	"log"
+	"fmt"
 	"regexp"
 	"time"
 )
@@ -18,7 +18,7 @@ func Ping(config *Config) {
 
 	for {
 		if err != nil {
-			log.Printf("[ERROR] %s", err)
+			fmt.Printf("[ERROR] %s\n", err)
 			time.Sleep(time.Duration(config.Interval) * time.Second)
 		}
 
@@ -48,7 +48,7 @@ func Ping(config *Config) {
 			}
 
 			dur := rAfterDP.ReplaceAllString(time.Since(now).String(), "")
-			log.Printf("%s | %s %s", now.Format(time.TimeOnly), v, dur)
+			fmt.Printf("%s | %s %s\n", now.Format(time.TimeOnly), v, dur)
 			time.Sleep(time.Duration(config.Interval) * time.Second)
 		}
 	}
