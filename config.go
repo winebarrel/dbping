@@ -10,7 +10,6 @@ import (
 	"github.com/go-sql-driver/mysql"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/stdlib"
-	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 type DBDriver string
@@ -124,14 +123,14 @@ func (cfg *Config) getPostgreSQLConnector() (driver.Connector, error) {
 	}
 
 	if cfg.IAMAuth {
-		host, err := resolveCNAME(pgcfg.Config.Host)
+		host, err := resolveCNAME(pgcfg.Host)
 
 		if err != nil {
 			return nil, err
 		}
 
-		endpoint := fmt.Sprintf("%s:%d", host, pgcfg.Config.Port)
-		user := pgcfg.Config.User
+		endpoint := fmt.Sprintf("%s:%d", host, pgcfg.Port)
+		user := pgcfg.User
 
 		opts = append(opts, stdlib.OptionBeforeConnect(func(ctx context.Context, cc *pgx.ConnConfig) error {
 			token, err := buildIAMAuthToken(ctx, endpoint, user)
