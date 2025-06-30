@@ -3,7 +3,7 @@ module github.com/winebarrel/dbping
 go 1.23.3
 
 require (
-	github.com/alecthomas/kong v1.11.0
+	github.com/alecthomas/kong v1.12.0
 	github.com/aws/aws-sdk-go-v2/config v1.29.17
 	github.com/aws/aws-sdk-go-v2/feature/rds/auth v1.5.13
 	github.com/go-sql-driver/mysql v1.9.3
